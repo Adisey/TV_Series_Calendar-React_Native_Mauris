@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Container, Text } from 'native-base';
 // Components
+import { TitleStartPage } from '../Components';
 
 
 export default class StartPage extends Component {
-
     static navigationOptions = {
-        title: 'StartPage',
+        title:            'Super Film'.toUpperCase(),
+        headerTitleStyle: { alignSelf: 'center' },
     };
 
     render () {
@@ -19,8 +20,9 @@ export default class StartPage extends Component {
 
         return (
             <Container>
-                <Text
-                    onPress = { _showDays }>StartPage</Text>
+                <TitleStartPage
+                    onPress = { _showDays }
+                />
 
             </Container>
         );
