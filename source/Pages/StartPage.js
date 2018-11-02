@@ -1,5 +1,6 @@
+//Core
 import React, { Component } from 'react';
-import { Container} from 'native-base';
+import { Container } from 'native-base';
 // Components
 import { TitleStartPage, MonthCalendar } from '../Components';
 
@@ -7,7 +8,11 @@ import { TitleStartPage, MonthCalendar } from '../Components';
 export default class StartPage extends Component {
     static navigationOptions = {
         title:            'Super Film'.toUpperCase(),
-        headerTitleStyle: { alignSelf: 'center' },
+        headerTitleStyle: {
+            textAlign: 'center',
+            alignSelf: 'center',
+            flex:      1,
+        },
     };
 
     render () {
@@ -20,7 +25,7 @@ export default class StartPage extends Component {
 
         return (
             <Container>
-                <TitleStartPage/>
+                <TitleStartPage />
                 <MonthCalendar
                     showDay = { _showDay }
                 />

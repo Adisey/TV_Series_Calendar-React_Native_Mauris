@@ -1,9 +1,10 @@
+//Core
 import React, { Component } from 'react';
 import { func } from "prop-types";
 import { Text, View, Dimensions } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
-import { ruCalendar } from '../../static';
 // Components
+import { ruCalendar } from '../../static';
 const styles = {
     mainCalendar: {
         backgroundColor: 'blue',
