@@ -5,15 +5,17 @@ import { Container, Text } from 'native-base';
 
 export default class ShowDays extends Component {
     static navigationOptions = {
-        title: 'ShowDays',
+        title:            'Super Film'.toUpperCase(),
+        headerTitleStyle: { alignSelf: 'center' },
     };
 
     render () {
-        const { navigate } = this.props.navigation;
+        const { navigation } = this.props;
+        const day = navigation.getParam('previewDay', 'day');
 
         return (
             <Container>
-                <Text>ShowDays</Text>
+                <Text>{day}</Text>
             </Container>
         );
     }

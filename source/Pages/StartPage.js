@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Text } from 'native-base';
+import { Container} from 'native-base';
 // Components
-import { TitleStartPage } from '../Components';
+import { TitleStartPage, MonthCalendar } from '../Components';
 
 
 export default class StartPage extends Component {
@@ -12,18 +12,18 @@ export default class StartPage extends Component {
 
     render () {
         const { navigate } = this.props.navigation;
-        const _showDays = () => {
+        const _showDay = (day) => {
             navigate('ShowDays', {
-                name: 'ShowDays - 123',
+                previewDay: day,
             });
         };
 
         return (
             <Container>
-                <TitleStartPage
-                    onPress = { _showDays }
+                <TitleStartPage/>
+                <MonthCalendar
+                    showDay = { _showDay }
                 />
-
             </Container>
         );
     }
