@@ -11,7 +11,7 @@ const styles = {
     },
     spinner: {
         size:  "small",
-        color: "#00ff00",
+        color: "#00FF00",
     },
 };
 

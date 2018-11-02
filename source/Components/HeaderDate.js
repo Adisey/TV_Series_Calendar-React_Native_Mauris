@@ -6,7 +6,7 @@ import { ruCalendar } from '../../static';
 
 const styles = {
     headerBox: {
-        flex:              0.05,
+        backgroundColor:   '#FFFFFF',
         justifyContent:    'center',
         flexDirection:     'row',
         padding:           10,
@@ -14,6 +14,7 @@ const styles = {
         borderBottomWidth: 1,
         borderTopColor:    '#f6f6f6',
         borderTopWidth:    1,
+        margin:            0,
     },
     headerText: {
         fontWeight: 'bold',

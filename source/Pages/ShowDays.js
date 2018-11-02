@@ -1,8 +1,8 @@
 //Core
 import React, { Component } from 'react';
-import { Container, View } from 'native-base';
+import { View, Text } from 'react-native';
 // Components
-import { Spinner, HeaderDate } from '../Components';
+import { Spinner, HeaderDate, SeriesList } from '../Components';
 import { api } from "../REST";
 
 
@@ -18,7 +18,7 @@ export default class ShowDays extends Component {
     state = {
         isSpinning: false,
         showDay:    null,
-        country:    'UA',
+        country:    'RU',
         schedule:   [],
     };
     componentDidMount () {
@@ -52,7 +52,6 @@ export default class ShowDays extends Component {
             this._setSpinning(false);
         }
 
-
     };
 
         _setSpinning = (isSpinning) => {
@@ -62,15 +61,21 @@ export default class ShowDays extends Component {
         };
 
         render () {
-            const { isSpinning } = this.state;
+            const { isSpinning, schedule } = this.state;
             const { navigation } = this.props;
             const day = navigation.getParam('previewDay', 'day');
+            const countSchedule =  schedule.length;
 
             return (
-                <Container>
-                    <Spinner isSpinning = { isSpinning } />
+                <View>
                     <HeaderDate day = { day } />
-                </Container>
+                    <Spinner isSpinning = { isSpinning } />
+                    <Text>{countSchedule}</Text>
+                    <SeriesList
+                        isSpinning = { isSpinning }
+                        schedule = { schedule }
+                    />
+                </View>
             );
         }
 }

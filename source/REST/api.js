@@ -2,7 +2,10 @@ import { SCHEDULE_URL } from "./";
 
 export const api = {
     async fetchSchedule (showDay, country) {
-        const response = await fetch(`${SCHEDULE_URL}?date=${showDay}`, {
+        const URL = `${SCHEDULE_URL}?${country?`country=${country}&`:''}date=${showDay}`;
+
+        console.log(` -> "URL" -> `, URL);
+        const response = await fetch(URL, {
             method: "GET",
         });
 
