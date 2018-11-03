@@ -4,7 +4,6 @@ export const api = {
     async fetchSchedule (showDay, country) {
         const URL = `${SCHEDULE_URL}?${country?`country=${country}&`:''}date=${showDay}`;
 
-        console.log(` -> "URL" -> `, URL);
         const response = await fetch(URL, {
             method: "GET",
         });
