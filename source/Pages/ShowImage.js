@@ -10,6 +10,8 @@ export default class ShowImage extends Component {
             headerTitleStyle: {
                 textAlign: 'center',
                 alignSelf: 'center',
+                flex:      0.8,
+
             },
         };
     };

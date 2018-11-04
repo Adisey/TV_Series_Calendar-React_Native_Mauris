@@ -65,10 +65,8 @@ export default class SeriesList extends Component {
     };
     static defaultProps = {
         schedule:    [],
+        showImage:   () => {},
         SmartButton: null,
-        showImage:   () => {
-            console.log(`NOT function showImage`);
-        },
     };
 
     render () {
