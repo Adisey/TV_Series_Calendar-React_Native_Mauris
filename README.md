@@ -22,6 +22,11 @@ https://drive.google.com/drive/folders/1Pk2tdkPJbDKoal--aR898wPD_SlnSnKN?usp=sha
 - (п.5) Реализация отображения original изображения по нажатию на medium
 - (п.7) ссылка на apk файл или инструкция по сборке
 
-####ссылка на apk файл 
+####ссылка на apk файл:
+ https://github.com/Adisey/p904-TV_series_calendar-raect_native-Mauris/blob/master/android/app/release/app-release.apk
 
 ####инструкция по сборке
+* \android\gradlew.bat assembleRelease _(_Либо_ _из_ _интерфеёса_ _phpStorm_)_
+* [Создаём keystore _(_Из_ _интефейса_ _Android_ _Studio_)_] _(_Если_ _ещё_ _нет_)_
+* Подписывает APK (\android\app\build\outputs\apk\release\app-release-unsigned.apk) _(_Из_ _интефейса_ _Android_ _Studio_)_
+* Подписанный релиз _(android\app\release\app-release.apk)_ можно выкладывать на телефон.
