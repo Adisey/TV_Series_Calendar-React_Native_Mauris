@@ -34,7 +34,6 @@ const styles = {
     buttonImage: {
         width:  20,
         height: 20,
-
     },
 };
 

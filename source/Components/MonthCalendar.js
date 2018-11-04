@@ -1,10 +1,13 @@
 //Core
 import React, { Component } from 'react';
 import { func } from "prop-types";
-import { Text, View, Dimensions } from 'react-native';
+import { Text, View, Dimensions, Image } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 // Components
 import { ruCalendar } from '../../static';
+import leftImg from '../../static/left.png';
+import rightImg from '../../static/right.png';
+
 const styles = {
     mainCalendar: {
         backgroundColor: 'blue',
@@ -37,6 +40,10 @@ const styles = {
         fontSize:   20,
         fontWeight: 'bold',
     },
+    buttonImage: {
+        width:  20,
+        height: 20,
+    },
 };
 
 LocaleConfig.locales.ru = ruCalendar;
@@ -55,10 +62,10 @@ export default class MonthCalendar extends Component {
     render () {
         const _renderArrow = (direction) => {
             if (direction === 'left') {
-                return <Text style = { styles.arrow }>{'<'}</Text>;
+                return <Image source = { leftImg } style = { styles.buttonImage } />;
             }
 
-            return <Text style = { styles.arrow }>{'>'}</Text>;
+            return <Image source = { rightImg } style = { styles.buttonImage } />;
         };
         const toDayStr = new Date().toISOString().substring(0, 10);
         const markedDates ={
@@ -90,7 +97,7 @@ export default class MonthCalendar extends Component {
                     firstDay = { 1 }
                     hideArrows = { false }
                     horizontal
-                    hideDayNames // так было в ТЗ, я бы лтображал имена дней недели
+                    hideDayNames // так было в ТЗ, я отображал бы имена дней недели
                     monthFormat = { 'MMMM' } //ToDo: Если не текущий год, его нужно показать.
                     onDayPress = { _onDayPress }
                     pagingEnabled
