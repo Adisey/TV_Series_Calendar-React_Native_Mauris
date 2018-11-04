@@ -33,3 +33,11 @@ https://drive.google.com/drive/folders/1Pk2tdkPJbDKoal--aR898wPD_SlnSnKN?usp=sha
 ![Главная страница](https://github.com/Adisey/p904-TV_series_calendar-raect_native-Mauris/blob/master/demo/main.png)
 ![Отображение эпизодов на выбранный день](https://github.com/Adisey/p904-TV_series_calendar-raect_native-Mauris/blob/master/demo/showday.png)
 ![Оригинальная картинка эпизода](https://github.com/Adisey/p904-TV_series_calendar-raect_native-Mauris/blob/master/demo/showoriginal.png)
+
+---
+##### PS: Что бы ещё сделал, что бы отдать жене для пользования. ;)
+1. Обернул бы стейт в Redux.
+2. Вынес на интерфейс наснойку выбора страны
+3. На основной странице, отображал бы в календарике, наличие сериалов по датам.
+4. По отдельной (i) кнопке, выводил бы полное описание сериала.
+5. По отдельной (с) кнопке, выводил бы календарь сериала. 
