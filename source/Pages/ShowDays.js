@@ -119,6 +119,14 @@ export default class ShowDays extends Component {
                 : null
             ;
         };
+        const { navigate } = this.props.navigation;
+        const showImage = (title, originalImage) => {
+            navigate('ShowImage', {
+                title,
+                originalImage,
+            });
+        };
+
 
         return (
             <View style = { styles.main }>
@@ -127,6 +135,7 @@ export default class ShowDays extends Component {
                 {!isSpinning && schedule.length ?
                     <SeriesList
                         schedule = { short? shortSchedule : schedule }
+                        showImage = { showImage }
                         SmartButton = { SmartButton }
                     /> : null
                 }

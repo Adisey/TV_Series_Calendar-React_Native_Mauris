@@ -1,7 +1,7 @@
 //Core
 import React, { Component } from 'react';
 import { arrayOf, func } from "prop-types";
-import { ScrollView, View, Text, Image } from 'react-native';
+import { ScrollView, View, Text, Image, TouchableOpacity } from 'react-native';
 // Components
 import qImg from '../../static/Question_mark.png';
 const styles = {
@@ -60,44 +60,63 @@ const styles = {
 export default class SeriesList extends Component {
     static propTypes = {
         schedule:    arrayOf.isRequired,
+        showImage:   func.isRequired,
         SmartButton: func.isRequired,
     };
     static defaultProps = {
         schedule:    [],
         SmartButton: null,
+        showImage:   () => {
+            console.log(`NOT function showImage`);
+        },
     };
 
     render () {
-        const { schedule, SmartButton }= this.props;
+        const { schedule, SmartButton, showImage }= this.props;
         const SeriesListJSX = schedule.map((i) => {
             const previewImage = i.show && i.show.image && i.show.image.medium?
                 { uri: i.show.image.medium }:
                 qImg;
+            const title = i.show && i.show.name ? i.show.name : 'Название не найдено';
+            const year = i.show && i.show.premiered ? i.show.premiered.substring(0, 4) : '????';
+            const season = i.season ? i.season : '?';
+            const number = i.number ? i.number : '?';
+            const originalImage = i.show && i.show.image && i.show.image.original?
+                { uri: i.show.image.original }:
+                i.show && i.show.image && i.show.image.medium ?
+                    { uri: i.show.image.medium } :
+                    qImg;
+
+            const _showImage = () => {
+                showImage(title, originalImage);
+            };
 
             return (
                 <View
                     key = { i.id }
                     style = { styles.seriesItem }>
 
-                    <View style = { styles.seriesItemPictureBox } >
+                    <TouchableOpacity
+                        style = { styles.seriesItemPictureBox }
+                        onPress = { _showImage }>
                         <Image
                             source = { previewImage }
                             style = { styles.seriesItemPicture }
                         />
-                    </View>
+                    </TouchableOpacity>
                     <View style = { styles.seriesItemBody } >
                         <View style = { styles.seriesItemBodyHeader } >
                             <View style = { styles.seriesItemTitle } >
-                                <Text style = { styles.seriesTextTitle }>{i.show.name}</Text>
+                                <Text style = { styles.seriesTextTitle }>{title}</Text>
                             </View>
                             <View style = { styles.seriesItemYear } >
-                                <Text style = { styles.seriesTextYear }>{i.show.premiered.substring(0, 4)}</Text>
+                                <Text style = { styles.seriesTextYear }>{year}</Text>
                             </View>
                         </View>
                         <View style = { styles.seriesItemBodyFooter } >
                             <View style = { styles.seriesItemSeries } >
-                                <Text style = { styles.seriesTextSeasonNumber }>Сезон: {i.season}</Text>
-                                <Text style = { styles.seriesTextSeasonNumber }>Эпизод: {i.number}</Text>
+                                <Text style = { styles.seriesTextSeasonNumber }>Сезон: {season}</Text>
+                                <Text style = { styles.seriesTextSeasonNumber }>Эпизод: {number}</Text>
                             </View>
                         </View>
                     </View>
