@@ -12,8 +12,8 @@ const styles = {
         padding:           10,
         borderBottomColor: '#f6f6f6',
         borderBottomWidth: 1,
-        borderTopColor:    '#f6f6f6',
-        borderTopWidth:    1,
+        // borderTopColor:    '#f6f6f6',
+        // borderTopWidth:    1,
         margin:            0,
     },
     headerText: {

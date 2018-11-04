@@ -1,14 +1,12 @@
 //Core
 import React, { Component } from 'react';
-import { arrayOf } from "prop-types";
+import { arrayOf, func } from "prop-types";
 import { ScrollView, View, Text, Image } from 'react-native';
 // Components
 import qImg from '../../static/Question_mark.png';
-
 const styles = {
     scrollView: {
         backgroundColor: '#FFFFFF',
-
     },
     seriesItem: {
         margin:        20,
@@ -61,16 +59,16 @@ const styles = {
 
 export default class SeriesList extends Component {
     static propTypes = {
-        schedule: arrayOf.isRequired,
+        schedule:    arrayOf.isRequired,
+        SmartButton: func.isRequired,
     };
     static defaultProps = {
-        schedule: [],
+        schedule:    [],
+        SmartButton: null,
     };
 
     render () {
-        const { schedule }= this.props;
-
-        console.log(` -> "schedule.length" -> `, schedule.length);
+        const { schedule, SmartButton }= this.props;
         const SeriesListJSX = schedule.map((i) => {
             const previewImage = i.show && i.show.image && i.show.image.medium?
                 { uri: i.show.image.medium }:
@@ -105,13 +103,12 @@ export default class SeriesList extends Component {
                     </View>
                 </View>
             );
-        }
-        );
-
+        });
 
         return (
             <ScrollView style = { styles.scrollView }>
                 {SeriesListJSX}
+                <SmartButton />
             </ScrollView>
         );
     }

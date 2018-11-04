@@ -1,17 +1,40 @@
 //Core
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 // Components
 import { Spinner, HeaderDate, SeriesList } from '../Components';
 import { api } from "../REST";
-// __mocks__
-import { tempSchedule } from '../../__mocks__/scherule';
+import upImg from '../../static/up.png';
+import downImg from '../../static/down.png';
+import { endingWord } from '../instruments';
 
 const styles = {
-    notSeries: {
-        fontSize:  20,
+    main: {
+        flexDirection:   'column',
+        backgroundColor: '#FFFFFF',
+        flex:            1,
+    },
+    notSeriesBox: {
+        flex:           1,
+        justifyContent: "center",
+    },
+
+    notSeriesText: {
+        fontSize:  18,
         color:     '#FF0000',
         textAlign: 'center',
+    },
+    button: {
+        flexDirection:   'row',
+        justifyContent:  "center",
+        backgroundColor: '#FFFFFF',
+        padding:         10,
+        margin:          20,
+    },
+    buttonImage: {
+        width:  20,
+        height: 20,
+
     },
 };
 
@@ -25,22 +48,17 @@ export default class ShowDays extends Component {
         },
     };
     state = {
-        isSpinning: false,
-        showDay:    null,
-        country:    'UA',
-        schedule:   [],
+        isSpinning:    false,
+        showDay:       null,
+        country:       'US',
+        schedule:      [],
+        short:         true,
+        shortCount:    2,
+        shortSchedule: [],
     };
     componentDidMount () {
         this._fetchScheduleAsync();
-        // this._fetchMocks();
     }
-    _fetchMocks = () => {
-        this.setState({
-            showDay:  '2018-11-03',
-            schedule: tempSchedule,
-        });
-    };
-
 
     _fetchScheduleAsync = async () => {
         const { navigation } = this.props;
@@ -62,6 +80,7 @@ export default class ShowDays extends Component {
 
             this.setState({
                 schedule,
+                shortSchedule: schedule.slice(0, 2),
             });
 
         } catch ({ message }) {
@@ -76,26 +95,48 @@ export default class ShowDays extends Component {
             isSpinning,
         });
     };
+    _setShort = () => {
+        this.setState({
+            short: !this.state.short,
+        });
+    };
 
     render () {
-        const { isSpinning, schedule } = this.state;
+        const { isSpinning, schedule, short, shortCount, shortSchedule } = this.state;
         const { navigation } = this.props;
         const day = navigation.getParam('previewDay', 'day');
         const countSchedule =  schedule.length;
+        const SmartButton = () => {
+            return countSchedule>shortCount
+                ? <TouchableOpacity
+                    style = { styles.button }
+                    onPress = { this._setShort }>
+                    <Text>{short? `Ещё ${countSchedule-shortCount} сериал${endingWord(countSchedule-shortCount)}`: 'Показать основные'} </Text>
+                    <Image
+                        source = { short? downImg: upImg }
+                        style = { styles.buttonImage }
+                    />
+                </TouchableOpacity>
+                : null
+            ;
+        };
+
+
         return (
-            <View>
+            <View style = { styles.main }>
                 <HeaderDate day = { day } />
                 { isSpinning ? <Spinner isSpinning /> : null }
-                {!isSpinning && schedule ?
+                {!isSpinning && schedule.length ?
                     <SeriesList
-                        schedule = { schedule }
-                    /> : <Text style = { styles.notSeries }>В этот день нет сериалов!</Text>
+                        schedule = { short? shortSchedule : schedule }
+                        SmartButton = { SmartButton }
+                    /> : null
                 }
-                <Text>{countSchedule}</Text>
-
-                {/*<Button*/}
-                {/*title = 'Больше'*/}
-                {/*/>*/}
+                {!isSpinning && !schedule.length ?
+                    <View style = { styles.notSeriesBox }>
+                        <Text style = { styles.notSeriesText }>В этот день сериалы не найдены!</Text>
+                    </View>: null
+                }
             </View>
         );
     }
