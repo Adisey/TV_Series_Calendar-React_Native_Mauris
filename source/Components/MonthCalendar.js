@@ -58,8 +58,11 @@ export default class MonthCalendar extends Component {
     static propTypes = {
         showDay: func.isRequired,
     };
-
+    state = {
+        currentYear: new Date().getFullYear(),
+    };
     render () {
+        const {currentYear} = this.state;
         const _renderArrow = (direction) => {
             if (direction === 'left') {
                 return <Image source = { leftImg } style = { styles.buttonImage } />;
@@ -90,22 +93,31 @@ export default class MonthCalendar extends Component {
 
             showDay(day.dateString);
         };
+        const _setYear = (newYear) => {
+            this.setState({
+                currentYear: newYear,
+            });
+        };
+        console.log(`render -> "currentYear" -> `, currentYear);
+        const monthFormat = new Date().getFullYear() === currentYear ? 'MMMM' : 'MMMM yyyy';
+        console.log(` -> "monthFormat" -> `, monthFormat);
 
         return (
             <View style = { styles.mainCalendar }>
                 <Calendar
                     firstDay = { 1 }
                     hideArrows = { false }
-                    horizontal
                     hideDayNames // так было в ТЗ, я отображал бы имена дней недели
-                    monthFormat = { 'MMMM' } //ToDo: Если не текущий год, его нужно показать.
+
+                    onMonthChange = {(month) => {_setYear(month.year)}}
+
+                    monthFormat = { monthFormat } //ToDo: Если не текущий год, его нужно показать.
                     onDayPress = { _onDayPress }
                     pagingEnabled
                     renderArrow = { _renderArrow }
                     showScrollIndicator
                     style = { styles.calendar }
                     theme = { styles.calendarTheme }
-
                     markingType = { 'custom' }
                     markedDates = { markedDates }
                 />
