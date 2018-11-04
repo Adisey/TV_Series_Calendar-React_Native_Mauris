@@ -121,7 +121,6 @@ export default class ShowDays extends Component {
             ;
         };
 
-
         return (
             <View style = { styles.main }>
                 <HeaderDate day = { day } />
